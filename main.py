@@ -1,16 +1,13 @@
-
+import time
 import pandas as pd
 from immo_db import *
 from link_pages import explore_page
-
-import time
 
 import selenium
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 
 #Creating an empty database using the function create_db()
 immo_db = create_db()
@@ -18,11 +15,10 @@ immo_db = create_db()
 #Setting up the webdriver to access selenium
 options = Options()
 options.headless = True
-options.binary = r"C:\Program Files\Mozilla Firefox\firefox.exe"
-driver = webdriver.Firefox(options=options)
+driver = webdriver.Firefox()
 
 #Extracting data from the pages of "immoweb.be"
-for p in range(334):
+for p in range(300):
     
     #To access the right page, we need to increase p by 1
     p += 1
@@ -35,8 +31,7 @@ for p in range(334):
        
     #For the other pages, we just need to change the p value
     else:
-        
-        time.sleep(10)
+        time.sleep(5)
         url = "https://www.immoweb.be/fr/recherche/maison-et-appartement/a-vendre?countries=BE&page={}&orderBy=relevance".format(p)
         immo_db = explore_page(url, immo_db, driver)
 
@@ -54,7 +49,7 @@ for p in range(7):
         url = "https://www.immoweb.be/fr/recherche/maison-et-appartement/a-louer?countries=BE"
         immo_db = explore_page(url, immo_db, driver)
        
-    #For the other pages, we just need to change the p value
+    #For the other pages, we just need to change p value
     else:
         
         url = "https://www.immoweb.be/fr/recherche/maison-et-appartement/a-louer?countries=BE&page={}&orderBy=relevance".format(p)
@@ -63,10 +58,10 @@ for p in range(7):
 '''
 print(immo_db)
 
-driver.close()
+
 #exporting the csv file
 
-immo_db.to_csv(r"C:\Users\Guillaume\Documents\challenge-collecting-data\immoweb_database.csv", index=False)
+immo_db.to_csv(r"C:\Users\mah83\Documents\GitHub\challenge-collecting-data\data300pages.csv", index=False)
   
 
 
