@@ -1,5 +1,9 @@
 #Collect data from immoweb
 
+#BeCode challenge: from 18/11/20 to 23/11/20
+
+#Contributors: Guillaume, Reza? Frédéric
+
 The code is divided in 4 files:
 
 - main.py: this file needs to be run in order to extract the properties. We need to specify in this page:
